@@ -11,8 +11,8 @@ predictVideoButton.addEventListener('click', async () => {
         try {
             // Load the TensorFlow.js model and predict the video.
             const model = await tf.loadLayersModel('DDlstmjsmodel/model.json');
-            const data_to_predict = await framesExtraction(videoFile);
-            console.log(data_to_predict.shape);
+            const data_to_predict = await createDataToPredict(videoFile);
+            // console.log(data_to_predict[0][0].length);
             const predictions = model.predict(data_to_predict);
             console.log(predictions);
         } catch (error) {
@@ -35,9 +35,9 @@ async function createDataToPredict(videoFile) {
     }
   
     // Convert features to a TensorFlow.js tensor.
-    const tfFeatures = tf.tensor(features);
+    // const tfFeatures = tf.tensor(features);
   
-    return tfFeatures;
+    return features;
 }
   
   
@@ -84,7 +84,7 @@ async function framesExtraction(videoFile) {
   
       // Convert the image data to a TensorFlow.js tensor (you may need to adjust this part).
       const tfTensor = tf.browser.fromPixels(imageElement).div(255);
-  
+      
       // Append the normalized frame to the frames list.
       framesList.push(tfTensor);
     }
