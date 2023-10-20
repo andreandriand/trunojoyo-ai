@@ -4041,8 +4041,8 @@ fieldset:disabled .btn {
 }
 .dropdown-item:hover,
 .dropdown-item:focus {
-  color: #1e2125;
-  background-color: #f8f9fa;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .dropdown-item.active,
 .dropdown-item:active {
