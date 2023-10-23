@@ -96,10 +96,7 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
             </p>
           </div>
           <div class="col-lg-7">
-            <a href="https://www.youtube.com/watch?v=mwtbEGNABWU" class="video-wrap glightbox">
-              <span class="icon-play"></span>
-              <img src="images/img_4.jpg" alt="Image" class="img-fluid" />
-            </a>
+            <img src="images/img_4.jpg" alt="Image" class="img-fluid" />
           </div>
         </div>
         <div class="row g-5 justify-content-around">
@@ -108,8 +105,8 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
               <div class="text">
                 <h3 class="h6 fw-bold text-black">Upload a Video to Predict</h3>
                 <div class="mb-3 mt-4">
-                  <input class="form-control" type="file" id="formFile" />
-                  <button type="submit" name="submit" class="btn btn-success rounded-3 mt-3 px-3 py-2 fs-6">Upload</button>
+                  <input class="form-control" type="file" id="videoInput" accept="video/*" />
+                  <button type="submit" name="submit" id="predictVideo" class="btn btn-success rounded-3 mt-3 px-3 py-2 fs-6">Upload</button>
                 </div>
               </div>
             </div>
@@ -118,6 +115,8 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
             <div class="d-flex custom-card">
               <div class="text">
                 <h3 class="h6 fw-bold text-black">Prediction Result</h3>
+                <br />
+                <b><h4 class="h6" id="predictionResult"></h4></b>
               </div>
             </div>
           </div>
@@ -152,5 +151,8 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
     <script src="js/navbar.js"></script>
     <script src="js/counter.js"></script>
     <script src="js/custom.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="bisindo/bisindo.js"></script>
   </body>
 </html>
