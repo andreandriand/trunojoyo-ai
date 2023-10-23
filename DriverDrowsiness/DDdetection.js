@@ -12,9 +12,19 @@ predictVideoButton.addEventListener('click', async () => {
             // Load the TensorFlow.js model and predict the video.
             const model = await tf.loadLayersModel('DDlstmjsmodel/model.json');
             const data_to_predict = await createDataToPredict(videoFile);
-            // console.log(data_to_predict[0][0].length);
             const predictions = model.predict(data_to_predict);
-            console.log(predictions);
+            // Mengambil nilai dari tensor predictions sebagai array JavaScript
+            const predictionsArray = await predictions.array();
+
+            // Menampilkan hasil prediksi, misalnya dalam konsol
+            if (predictionsArray[0][0]>predictionsArray[0][1]){
+              result="Mengantuk";
+            }else{
+              result="Tidak Mengantuk"
+            }
+            const resultDiv = document.getElementById('predictionResult');
+            resultDiv.textContent = result;
+
         } catch (error) {
             console.error('Error loading or predicting with the model:', error);
         }
@@ -35,9 +45,9 @@ async function createDataToPredict(videoFile) {
     }
   
     // Convert features to a TensorFlow.js tensor.
-    // const tfFeatures = tf.tensor(features);
+    const tfFeatures = tf.tensor(features);
   
-    return features;
+    return tfFeatures;
 }
   
   
@@ -84,9 +94,11 @@ async function framesExtraction(videoFile) {
   
       // Convert the image data to a TensorFlow.js tensor (you may need to adjust this part).
       const tfTensor = tf.browser.fromPixels(imageElement).div(255);
+
+      const arraybiasa = tfTensor.arraySync();
       
       // Append the normalized frame to the frames list.
-      framesList.push(tfTensor);
+      framesList.push(arraybiasa);
     }
   
     // Remove the video element.
@@ -95,5 +107,3 @@ async function framesExtraction(videoFile) {
     // Return the frames list.
     return framesList;
 }
-  
-  
