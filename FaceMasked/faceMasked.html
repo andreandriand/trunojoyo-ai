@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta name="author" content="Trunojoyo AI" />
-    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="shortcut icon" href="../favicon.png" />
 
     <meta
       name="description"
@@ -18,14 +18,14 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css" />
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
-    <link rel="stylesheet" href="css/tiny-slider.css" />
-    <link rel="stylesheet" href="css/aos.css" />
-    <link rel="stylesheet" href="css/glightbox.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="../fonts/flaticon/font/flaticon.css" />
+    <link rel="stylesheet" href="../css/tiny-slider.css" />
+    <link rel="stylesheet" href="../css/aos.css" />
+    <link rel="stylesheet" href="../css/glightbox.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
-    <title>Bisindo Recognition &mdash; Trunojoyo AI</title>
+    <title>Face Masked Detection &mdash; Trunojoyo AI</title>
   </head>
   <body>
     <div class="site-mobile-menu site-navbar-target">
@@ -48,7 +48,7 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" style="letter-spacing: 1px; color: rgba(255, 255, 255, 0.8)" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Research </a>
               <ul class="dropdown-menu" style="background-color: rgba(255, 255, 255, 0.2)">
-                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="FaceMasked/faceMasked.html">Masked Face Detection</a></li>
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="faceMasked.html">Masked Face Detection</a></li>
                 <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="bisindo.html">BISINDO Recognition</a></li>
                 <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="DriverDrowsiness/DriverDrowsiness.html">Driver Drowsiness Detection</a></li>
               </ul>
@@ -69,15 +69,15 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
       </div>
     </nav>
 
-    <div class="hero-2 overlay" style="background-image: url('images/img_3.jpg')">
+    <div class="hero-2 overlay" style="background-image: url('../images/img_3.jpg')">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-5 mx-auto">
-            <h1 class="mb-5 text-center"><span>BISINDO Recognition</span></h1>
+            <h1 class="mb-5 text-center"><span>Face Masked Detection</span></h1>
 
             <div class="intro-desc text-left">
               <div class="line"></div>
-              <p>An Artificial Intelligence that doing Recognition to Indonesian Sign Languange (Bisindo)</p>
+              <p>An Artificial Intelligence that doing Face Masked Detection</p>
             </div>
           </div>
         </div>
@@ -89,36 +89,22 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
         <div class="row border-bottom mb-5 pb-5 justify-content-between">
           <div class="col-lg-4 align-self-center mb-5">
             <span class="d-block subheading mb-3">Our Research</span>
-            <h2 class="heading mb-4">Indonesian Sign Language Recognition</h2>
+            <h2 class="heading mb-4">Face Masked Detection</h2>
             <p>
-              Indonesian Sign Language (Bisindo) Recognition powered by Artificial Intelligence: Our cutting-edge technology understands and interprets the rich and expressive world of Indonesian Sign Language, enabling seamless
-              communication between the Deaf and hearing communities. Unlocking new avenues for inclusive and accessible communication through the power of AI.
+              This application consists of two main stages, namely face location detection and the classification of mask usage on the detected faces. The face location detection stage uses the 'blazeface' module obtained from
+              @tensorflow-models/blazeface. <br />This module provides the coordinates of the detection box (top, left, bottom, right) for a face in an image. The classification stage will classify the detected faces from the first stage
+              into three categories: full mask usage (green), partial mask usage (yellow), and no mask usage (red).
             </p>
+
+            <p>How to use this application:</p>
+            <ol>
+              <li>Direct your face towards the camera and maintain an upright position at a distance of 2 meters.</li>
+              <li>Please wait for a few minutes; the system will detect your mask usage.</li>
+            </ol>
           </div>
           <div class="col-lg-7">
-            <img src="images/img_4.jpg" alt="Image" class="img-fluid" />
-          </div>
-        </div>
-        <div class="row g-5 justify-content-around">
-          <div class="col-lg-4">
-            <div class="d-flex custom-card">
-              <div class="text">
-                <h3 class="h6 fw-bold text-black">Upload a Video to Predict</h3>
-                <div class="mb-3 mt-4">
-                  <input class="form-control" type="file" id="videoInput" accept="video/*" />
-                  <button type="submit" name="submit" id="predictVideo" class="btn btn-success rounded-3 mt-3 px-3 py-2 fs-6">Upload</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="d-flex custom-card">
-              <div class="text">
-                <h3 class="h6 fw-bold text-black">Prediction Result</h3>
-                <br />
-                <b><h4 class="h6" id="predictionResult"></h4></b>
-              </div>
-            </div>
+            <video id="video" autoplay style="display: none" width="640px" height="480px"></video>
+            <canvas id="canvas" width="640px" height="480px"></canvas>
           </div>
         </div>
       </div>
@@ -144,15 +130,16 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
       </div>
     </div>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/tiny-slider.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/glightbox.min.js"></script>
-    <script src="js/navbar.js"></script>
-    <script src="js/counter.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/tiny-slider.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/glightbox.min.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/counter.js"></script>
+    <script src="../js/custom.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="bisindo/bisindo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+    <script src="detection.js"></script>
   </body>
 </html>
