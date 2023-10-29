@@ -99,7 +99,7 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
             <img src="images/img_4.jpg" alt="Image" class="img-fluid" />
           </div>
         </div>
-        <div class="row g-5 justify-content-around">
+        <div class="row g-5 justify-content-around pb-5">
           <div class="col-lg-4">
             <div class="d-flex custom-card">
               <div class="text">
@@ -117,6 +117,28 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
                 <h3 class="h6 fw-bold text-black">Prediction Result</h3>
                 <br />
                 <b><h4 class="h6" id="predictionResult"></h4></b>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-5 justify-content-around pt-5">
+          <div class="col-lg-4">
+            <div class="d-flex custom-card">
+              <div class="text">
+                <h3 class="h6 fw-bold text-black">Realtime Video to Predict</h3>
+                <div class="mb-3 mt-4">
+                  <video class="input_video" style="display: none;"></video>
+                  <canvas class="output_canvas" width="520px" height="380px"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex custom-card">
+              <div class="text">
+                <h3 class="h6 fw-bold text-black">Prediction Result</h3>
+                <br />
+                <b><h4 class="h6" id="predictedLetter"></h4></b>
               </div>
             </div>
           </div>
@@ -152,7 +174,98 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
     <script src="js/counter.js"></script>
     <script src="js/custom.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script> -->
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="bisindo/bisindo.js"></script>
+    <script type="module">
+      const videoElement = document.getElementsByClassName('input_video')[0];
+      const canvasElement = document.getElementsByClassName('output_canvas')[0];
+      const canvasCtx = canvasElement.getContext('2d');
+      
+      let model;
+      const classList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+      
+      async function loadModel() {
+          model = await tf.loadLayersModel("bisindo/model-realtime/model.json");
+      }
+
+      async function onResults(results) {
+          canvasCtx.save();
+          canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+          canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+          if (results.multiHandLandmarks) {
+              for (const landmarks of results.multiHandLandmarks) {
+                  drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 5 });
+                  drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 2 });
+
+                  // Lakukan prediksi huruf berdasarkan landmarks
+                  const predictedLetter = await predictLetter(landmarks);
+                  console.log('Prediksi Huruf:', predictedLetter);
+              }
+          }
+          canvasCtx.restore();
+      }
+
+      async function predictLetter(landmarks) {
+          await loadModel();            
+          const landmarksArray = [];
+          for (const landmark of landmarks) {
+              landmarksArray.push(landmark.x, landmark.y, landmark.z);
+          }
+          let inputTensor = tf.tensor([landmarksArray]); // Ubah landmarks menjadi tensor
+          inputTensor = inputTensor.expandDims(2); // Tambahkan dimensi batch
+          const predictions = model.predict(inputTensor);
+
+          // Ambil hasil prediksi sebagai array JavaScript
+          const predictionsArray = await predictions.array();
+          
+          // Temukan indeks dengan nilai tertinggi sebagai prediksi huruf
+          const predictedIndex = await getIndexMax(predictionsArray[0]);
+          
+          // Ubah indeks menjadi huruf A-Z
+          const predictedLetter = classList[predictedIndex];
+          document.getElementById('predictedLetter').innerText = "Huruf yang terdeteksi : " + predictedLetter;
+
+          return predictedLetter;
+      }
+
+      async function getIndexMax(array) {
+          let max = array[0];
+          let indexMax = 0;
+          for (let i = 1; i < array.length; i++) {
+              if (array[i] > max) {
+                  max = array[i];
+                  indexMax = i;
+              }
+          }
+          return indexMax;
+      }
+
+      const hands = new Hands({ locateFile: (file) => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+      } });
+      hands.setOptions({
+          maxNumHands: 2,
+          modelComplexity: 1,
+          minDetectionConfidence: 0.5,
+          minTrackingConfidence: 0.5
+      });
+      hands.onResults(onResults);
+
+      const camera = new Camera(videoElement, {
+          onFrame: async () => {
+              await hands.send({ image: videoElement });
+          },
+          width: 520,
+          height: 380
+      });
+      camera.start();
+    </script>
   </body>
 </html>
