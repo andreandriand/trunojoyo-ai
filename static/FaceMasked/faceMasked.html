@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="author" content="Trunojoyo AI" />
+    <link rel="shortcut icon" href="../favicon.png" />
+
+    <meta
+      name="description"
+      content="
+At TrunjoyoAI, we're a team of researcher and creators who came together with a passion and expertise that drive us to push the boundaries of AI and machine learning, revolutionizing industries and shaping the future of technology."
+    />
+    <meta name="keywords" content="Machine Learning, Artificial Intelligence, Dataset, Trunojoyo University" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="../fonts/flaticon/font/flaticon.css" />
+    <link rel="stylesheet" href="../css/tiny-slider.css" />
+    <link rel="stylesheet" href="../css/aos.css" />
+    <link rel="stylesheet" href="../css/glightbox.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Face Masked Detection &mdash; Trunojoyo AI</title>
+  </head>
+  <body>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="navbar navbar-dark navbar-expand-lg site-nav">
+      <div class="container">
+        <a href="/" class="logo m-0 float-start fs-3">trunojoyo<span class="text-primary">.</span>ai </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse site-navigation" id="navbarText">
+          <ul class="navbar-nav ms-auto mb-2 mt-3 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="letter-spacing: 1px; color: rgba(255, 255, 255, 0.8)" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Research </a>
+              <ul class="dropdown-menu" style="background-color: rgba(255, 255, 255, 0.2)">
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="faceMasked.html">Masked Face Detection</a></li>
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="../bisindo.html">BISINDO Recognition</a></li>
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="../DriverDrowsiness/DriverDrowsiness.html">Driver Drowsiness Detection</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="letter-spacing: 1px; color: rgba(255, 255, 255, 0.8)" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dataset </a>
+              <ul class="dropdown-menu" style="background-color: rgba(255, 255, 255, 0.2)">
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="#">Masked Face</a></li>
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="../dataset/bisindo.html">Indonesian Sign Language (BISINDO)</a></li>
+                <li><a class="dropdown-item" style="color: rgba(255, 255, 255, 0.8)" href="https://www.kaggle.com/datasets/esrakavalci/sust-ddd">Driver Drowsiness</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="letter-spacing: 1px; color: rgba(255, 255, 255, 0.8)" href="../about.html">About Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-2 overlay" style="background-image: url('../images/img_3.jpg')">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-5 mx-auto">
+            <h1 class="mb-5 text-center"><span>Face Masked Detection</span></h1>
+
+            <div class="intro-desc text-left">
+              <div class="line"></div>
+              <p>An Artificial Intelligence that doing detection on someone using face mask or not</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row border-bottom mb-5 pb-5 justify-content-between">
+          <div class="col-lg-4 align-self-center mb-5">
+            <span class="d-block subheading mb-3">Our Research</span>
+            <h2 class="heading mb-4">Face Masked Detection</h2>
+            <p>
+              This application consists of two main stages, namely face location detection and the classification of mask usage on the detected faces. The face location detection stage uses the 'blazeface' module obtained from
+              @tensorflow-models/blazeface. <br />This module provides the coordinates of the detection box (top, left, bottom, right) for a face in an image. The classification stage will classify the detected faces from the first stage
+              into three categories: full mask usage (green), partial mask usage (yellow), and no mask usage (red).
+            </p>
+
+            <p>How to use this application:</p>
+            <ol>
+              <li>Direct your face towards the camera and maintain an upright position at a distance of 2 meters.</li>
+              <li>Please wait for a few minutes; the system will detect your mask usage.</li>
+            </ol>
+          </div>
+          <div class="col-lg-7">
+            <video id="video" autoplay style="display: none" width="640px" height="480px"></video>
+            <canvas id="canvas" width="640px" height="480px"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center text-center copyright">
+      <div class="col-md-8">
+        <p class="small text-black-50">
+          Copyright &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          . All Rights Reserved. &mdash; Created by Trunojoyo AI Team 2023
+        </p>
+      </div>
+    </div>
+
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/tiny-slider.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/glightbox.min.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/counter.js"></script>
+    <script src="../js/custom.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+    <script src="detection.js"></script>
+  </body>
+</html>
