@@ -218,7 +218,7 @@ def predictBisindoCLSTM():
     data1 = create_data_to_predict_clstm(video_path)
 
 
-    print("SHAPEEE : ", data1.shape)
+    print("SHAPE : ", data1.shape)
 
     model_CLSTM=load_model('BisindoModel/CLSTM.h5')
     predicted=model_CLSTM.predict(data1)
