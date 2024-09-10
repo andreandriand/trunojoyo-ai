@@ -1,0 +1,1 @@
+www.trunojoyo-ai.id { redir https://trunojoyo-ai.id{uri} } trunojoyo-ai.id { reverse_proxy localhost:8000 }
