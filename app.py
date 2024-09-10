@@ -133,7 +133,7 @@ def create_data_to_predict_clstm(video_file_path):
 
     features = np.asarray(features)
 
-    print("FITURR : ",features.shape)
+    print("SHAPE : ",features.shape)
     return features
 
 @app.route("/")
@@ -194,7 +194,7 @@ def predictBisindo():
     predicted=model_ResLSTM.predict(data)
     result = np.argmax(predicted)
 
-    print("SHAPEEE : ", classes_list[result])
+    print("Result : ", classes_list[result])
 
     os.remove(video_path)
 

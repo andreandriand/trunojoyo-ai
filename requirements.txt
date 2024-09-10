@@ -1,0 +1,11 @@
+Flask==3.0.3
+keras==2.15.0
+numpy==1.26.4
+opencv-python==4.10.0.84
+tensorboard==2.15.2
+tensorboard-data-server==0.7.2
+tensorflow==2.15.0
+tensorflow-estimator==2.15.0
+tensorflow-intel==2.15.0
+tensorflow-io-gcs-filesystem==0.31.0
+virtualenv==20.26.4
