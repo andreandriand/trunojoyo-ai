@@ -100,6 +100,38 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
           </div>
         </div>
         <div class="row border-bottom g-5 justify-content-around pb-5">
+          <h2 class="h2 fw-bold text-black">Architecture</h2>
+          <div class="col-lg-4">
+            <div class="d-flex custom-card">
+              <div class="text-dark">
+                <div class="mb-3">
+                  <h6 class="fw-bold">ResNet-50 + LSTM</h6>
+                  <p style="text-align: justify">
+                    The first model architecture is built with a combination of ResNet-50 and Long Short-Term Memory (LSTM), where ResNet-50 functions to perform feature extraction on video data, and LSTM processes the sequence of the video
+                    data. The architecture of the LSTM used can be seen in the following figure.
+                  </p>
+                  <img src="images/model_lstm.png" alt="LSTM" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex custom-card">
+              <div class="text-dark">
+                <div class="mb-3">
+                  <h6 class="fw-bold">Convolutional LSTM</h6>
+                  <p style="text-align: justify">
+                    The second model architecture is built using the Convolutional LSTM method, where the preprocessed video data, without using ResNet-50, produces an output in the form of images. The data is then sent to the Convolutional
+                    LSTM for convolution processing and handling of the data sequence. The architecture of the Convolutional LSTM used can be seen in the following figure.
+                  </p>
+                  <img src="images/clstm(fix).png" alt="LSTM" width="500" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row border-bottom g-5 justify-content-around pt-5">
+          <h4>Convolutional LSTM</h4>
           <div class="col-lg-4">
             <div class="d-flex custom-card">
               <div class="text">
@@ -117,6 +149,29 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
                 <h3 class="h6 fw-bold text-black">Prediction Result</h3>
                 <br />
                 <b><h4 class="h6" id="predictionResult"></h4></b>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row border-bottom g-5 justify-content-around pt-5">
+          <h4>ResNet-50 + LSTM</h4>
+          <div class="col-lg-4">
+            <div class="d-flex custom-card">
+              <div class="text">
+                <h3 class="h6 fw-bold text-black">Upload a Video to Predict</h3>
+                <div class="mb-3 mt-4">
+                  <input class="form-control" type="file" id="videoInput2" accept="video/*" />
+                  <button type="submit" name="submit" id="predictVideo2" class="btn btn-success rounded-3 mt-3 px-3 py-2 fs-6">Upload</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex custom-card">
+              <div class="text">
+                <h3 class="h6 fw-bold text-black">Prediction Result</h3>
+                <br />
+                <b><h4 class="h6" id="predictionResult2"></h4></b>
               </div>
             </div>
           </div>
@@ -183,6 +238,7 @@ At TrunjoyoAI, we're a team of researcher and creators who came together with a 
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="bisindo/bisindo.js"></script>
+    <script src="bisindo/bisindo2.js"></script>
     <script type="module">
       const videoElement = document.getElementsByClassName("input_video")[0];
       const canvasElement = document.getElementsByClassName("output_canvas")[0];

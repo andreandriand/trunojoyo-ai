@@ -1,9 +1,9 @@
 const videoInput = document.getElementById("videoInput");
 const predictVideoButton = document.getElementById("predictVideo");
 
-const SEQUENCE_LENGTH = 50;
-const IMAGE_WIDTH = 100;
-const IMAGE_HEIGHT = 100;
+const SEQUENCE_LENGTH = 15;
+const IMAGE_WIDTH = 224;
+const IMAGE_HEIGHT = 224;
 
 predictVideoButton.addEventListener("click", async () => {
   const videoFile = videoInput.files[0];
@@ -11,7 +11,7 @@ predictVideoButton.addEventListener("click", async () => {
   if (videoFile) {
     try {
       // Load the TensorFlow.js model and predict the video.
-      const model = await tf.loadLayersModel("bisindo/model/model.json");
+      const model = await tf.loadLayersModel("bisindo/bisindoCLSTM_model/model.json");
       const data_to_predict = await createDataToPredict(videoFile);
       const predictions = model.predict(data_to_predict);
       // Mengambil nilai dari tensor predictions sebagai array JavaScript
